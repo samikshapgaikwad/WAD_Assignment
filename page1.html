@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add News</title>
+</head>
+<body style="font-family:Arial; background:#f2f2f2;">
+
+<div style="width:400px; margin:80px auto; background:#fff; padding:20px; border-radius:6px;">
+    <h2 style="text-align:center;">Add News</h2>
+
+    <form onsubmit="saveNews(); return false;">
+        <label><b>Date</b></label><br>
+        <input type="date" id="date" required
+               style="width:100%; padding:8px;"><br><br>
+
+        <label><b>Title</b></label><br>
+        <input type="text" id="title" required
+               style="width:100%; padding:8px;"><br><br>
+
+        <label><b>Description</b></label><br>
+        <textarea id="description" required
+                  style="width:100%; padding:8px; height:80px;"></textarea><br><br>
+
+        <button type="submit"
+                style="width:100%; padding:10px; background:#007bff; color:white; border:none;">
+            Add News
+        </button>
+    </form>
+
+    <a href="page2.html"
+       style="display:block; text-align:center; margin-top:15px; text-decoration:none; color:#007bff;">
+        View All News
+    </a>
+</div>
+
+<script>
+function saveNews() {
+    let newsList = JSON.parse(localStorage.getItem("news")) || [];
+
+    let newsItem = {
+        date: document.getElementById("date").value,
+        title: document.getElementById("title").value,
+        description: document.getElementById("description").value
+    };
+
+    newsList.push(newsItem);
+    localStorage.setItem("news", JSON.stringify(newsList));
+
+    document.querySelector("form").reset();
+    alert("News added successfully!");
+}
+</script>
+
+</body>
+</html>
